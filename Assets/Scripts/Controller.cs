@@ -28,4 +28,17 @@ public class Controller : MonoBehaviour
 
         controller.Move(mov);
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Key"))
+        {
+            other.gameObject.SetActive(false);
+            GameManager.Instance.updateKeyCount();
+          
+        }
+
+    }
+
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,11 +12,17 @@ public class GameManager : MonoBehaviour
     //public GameObject btnNextLevel;
     //public TMP_Text timeTxt;
     public GameObject player;
+    
     public static GameManager Instance;
     public GameState gameState;
     public Scene thisScene;
+    public Scene nextLevel;
+    public int numKeysCollected = 0;
     public static event Action<GameState> OnGameStateChanged;
-
+    private float currentTime = 0.0f;
+    public TextMeshProUGUI keysText;
+    public TextMeshProUGUI timertext;
+    public GameObject exitDoor;
 
 
     private void Awake()
@@ -43,6 +50,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.WinLevel:
                 gameState = GameState.WinLevel;
+                HandleWinLevel();
                
                 break;
             case GameState.LoseLevel:
@@ -67,8 +75,13 @@ public class GameManager : MonoBehaviour
 
     private void HandleWinLevel()
     {
-       
+        loadLevel();
 
+    }
+
+    private void loadLevel()
+    {
+        SceneManager.LoadScene(nextLevel.ToString());
     }
 
     private void HandlePlayingGame()
@@ -80,9 +93,28 @@ public class GameManager : MonoBehaviour
     {
         
         HandlePlayingGame();
+        keysText.SetText("keys: " + numKeysCollected + "/4");
+        currentTime = currentTime + Time.deltaTime;
+        int myTimer = (int)currentTime;
+        timertext.SetText(myTimer.ToString());
+       
+
     }
 
 
+
+    public void updateKeyCount()
+    {
+        numKeysCollected += 1;
+    }
+
+    private void unlockMazeDoor()
+    {
+        if (numKeysCollected == 4)
+            exitDoor.SetActive(false);
+       
+
+    }
 
 
 
@@ -97,4 +129,5 @@ public enum GameState
     WinGame,
     GameOver
 }
+
 
