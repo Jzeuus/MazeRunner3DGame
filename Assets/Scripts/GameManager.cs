@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState gameState;
     public Scene thisScene;
-    public Scene nextLevel;
+    public String nextLevel;
     public int numKeysCollected = 0;
     public static event Action<GameState> OnGameStateChanged;
     private float currentTime = 0.0f;
@@ -81,12 +81,13 @@ public class GameManager : MonoBehaviour
 
     private void loadLevel()
     {
-        SceneManager.LoadScene(nextLevel.ToString());
+        SceneManager.LoadScene(nextLevel);
     }
 
     private void HandlePlayingGame()
     {
-
+        if (numKeysCollected == 4)
+            exitDoor.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -107,15 +108,6 @@ public class GameManager : MonoBehaviour
     {
         numKeysCollected += 1;
     }
-
-    private void unlockMazeDoor()
-    {
-        if (numKeysCollected == 4)
-            exitDoor.SetActive(false);
-       
-
-    }
-
 
 
 }

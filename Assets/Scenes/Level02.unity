@@ -954,7 +954,7 @@ GameObject:
   - component: {fileID: 442604500}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 1
+  m_text: Level 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3529,6 +3529,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5717472746847897396, guid: a33d8a12e7d2a314e8fb3b86d5e1391b, type: 3}
   m_PrefabInstance: {fileID: 1399280737}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1399280739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1834379168713885826, guid: a33d8a12e7d2a314e8fb3b86d5e1391b, type: 3}
+  m_PrefabInstance: {fileID: 1399280737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1459534638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5717472746847897396, guid: a33d8a12e7d2a314e8fb3b86d5e1391b, type: 3}
@@ -3991,12 +3996,11 @@ MonoBehaviour:
   gameState: 0
   thisScene:
     m_Handle: 0
-  nextLevel:
-    m_Handle: 0
+  nextLevel: Level01
   numKeysCollected: 0
   keysText: {fileID: 290267755}
   timertext: {fileID: 371372916}
-  exitDoor: {fileID: 0}
+  exitDoor: {fileID: 1399280739}
 --- !u!4 &1740735330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5717472746847897396, guid: a33d8a12e7d2a314e8fb3b86d5e1391b, type: 3}
