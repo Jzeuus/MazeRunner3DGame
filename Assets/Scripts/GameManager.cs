@@ -16,17 +16,29 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState gameState;
     public Scene thisScene;
-    public String nextLevel;
+    //public String nextLevel;
     public int numKeysCollected = 0;
     public static event Action<GameState> OnGameStateChanged;
     private float currentTime = 0.0f;
+    public TextMeshProUGUI bestTimeTxt;
     public TextMeshProUGUI keysText;
-    public TextMeshProUGUI timertext;
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI LevelText;
     public GameObject exitDoor;
+    public int playerHealth = 100;
+
+    public GameObject nextLvl;
+    public GameObject restartLvl;
+    private Boolean gameOver = false;
+    public GameObject winTxt;
+    public static int bestTime = 0;
+    public AudioClip levelVictoryFX;
 
 
     private void Awake()
     {
+        print("game started");
         Instance = this;
         thisScene = SceneManager.GetActiveScene();
     }
@@ -34,6 +46,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UpdateGameState(GameState.Idle);
+        winTxt.SetActive(false);
+        restartLvl.SetActive(false);
+        nextLvl.SetActive(false);
+
+        //to lock in the centre of window
+        Cursor.lockState = CursorLockMode.Locked;
+        //to hide the curser
+        Cursor.visible = false;
     }
 
     public void UpdateGameState(GameState newState)
@@ -44,9 +64,7 @@ public class GameManager : MonoBehaviour
                 gameState = GameState.Idle;
                 break;
             case GameState.Playing:
-                gameState = GameState.Playing;
-                //Rigidbody playerRigidBody = player.GetComponent<Rigidbody>();
-               // playerRigidBody.isKinematic = false;             
+                gameState = GameState.Playing;          
                 break;
             case GameState.WinLevel:
                 gameState = GameState.WinLevel;
@@ -55,6 +73,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.LoseLevel:
                 gameState = GameState.LoseLevel;
+                HandelLoseLevel();
               
                 break;
             case GameState.WinGame:
@@ -70,39 +89,82 @@ public class GameManager : MonoBehaviour
 
     private void HandelLoseLevel()
     {
-      
-    }
+        print("handeling lost");
+        winTxt.SetActive(true);
+        winTxt.GetComponent<TextMeshProUGUI>().text = "You Lose!";
 
+        endLevel();
+
+    }
+    private void endLevel()
+    {
+        gameOver = true;
+        restartLvl.SetActive(true);
+        nextLvl.SetActive(true);
+        player.SetActive(false);
+        Cursor.lockState = CursorLockMode.None; // to unlock cursor
+        Cursor.visible = true; // to make cursor visible
+    }
     private void HandleWinLevel()
     {
-        loadLevel();
+        AudioSource.PlayClipAtPoint(levelVictoryFX, player.transform.position);
+        endLevel();
+        int score = (int)currentTime;
+        print("score= " + score.ToString());
+     
+        if (score < bestTime || bestTime==0)
+        {
+            bestTime = score;
+            winTxt.GetComponent<TextMeshProUGUI>().text = "New Best Time!";
+            winTxt.SetActive(true);
+            bestTimeTxt.SetText("BestTime: " + bestTime.ToString());
 
-    }
+        }
 
-    private void loadLevel()
+            //loadLevel();
+
+        }
+
+    
+
+    public void updateHealth()
     {
-        SceneManager.LoadScene(nextLevel);
+        playerHealth = playerHealth - 20;
+
     }
 
     private void HandlePlayingGame()
     {
-        if (numKeysCollected == 4)
-            exitDoor.SetActive(false);
+        
+            if (numKeysCollected == 4)
+                exitDoor.SetActive(false);
+            if (playerHealth <= 0)
+            {
+                UpdateGameState(GameState.LoseLevel);
+            }
+        
     }
 
     private void FixedUpdate()
     {
-        
-        HandlePlayingGame();
-        keysText.SetText("keys: " + numKeysCollected + "/4");
-        currentTime = currentTime + Time.deltaTime;
-        int myTimer = (int)currentTime;
-        timertext.SetText(myTimer.ToString());
-       
+        if (!gameOver)
+        {
+            HandlePlayingGame();
+            keysText.SetText("keys: " + numKeysCollected + "/4");
+            currentTime = currentTime + Time.deltaTime;
+            int myTimer = (int)currentTime;
+            timerText.SetText(myTimer.ToString());
+            healthText.SetText("HP: " + playerHealth.ToString());
+            bestTimeTxt.SetText("BestTime: " + bestTime.ToString());
+            LevelText.SetText(thisScene.name);
+        }
 
     }
 
-
+    public int getTime()
+    {
+        return (int)currentTime;
+    }
 
     public void updateKeyCount()
     {

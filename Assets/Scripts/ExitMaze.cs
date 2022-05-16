@@ -10,12 +10,13 @@ public class ExitMaze : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.GetComponent<Rigidbody>().CompareTag("Player"))
-        {
-            Destroy(collision.gameObject);
-            print("target destroyed");
+        if (other.gameObject.CompareTag("Exit")) 
+        { 
+
+            //Destroy(collision.gameObject);
+            // print("target destroyed");
 
             GameManager.Instance.UpdateGameState(GameState.WinLevel);
 
