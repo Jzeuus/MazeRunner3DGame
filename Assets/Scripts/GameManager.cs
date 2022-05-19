@@ -32,8 +32,11 @@ public class GameManager : MonoBehaviour
     public GameObject restartLvl;
     private Boolean gameOver = false;
     public GameObject winTxt;
-    public static int bestTime = 0;
+    public int bestTime = 0;
     public AudioClip levelVictoryFX;
+    public static int bestTimeLvl1 = 0;
+    public static int bestTimeLvl2 =0;
+    public static int bestTimeLvl3 =0;
 
 
     private void Awake()
@@ -54,6 +57,11 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         //to hide the curser
         Cursor.visible = false;
+
+        if (thisScene.name == "Level1") { bestTime = bestTimeLvl1; }
+        if (thisScene.name == "Level2") { bestTime = bestTimeLvl2; }
+        if (thisScene.name == "Level3") { bestTime = bestTimeLvl3; }
+
     }
 
     public void UpdateGameState(GameState newState)
@@ -115,6 +123,11 @@ public class GameManager : MonoBehaviour
         if (score < bestTime || bestTime==0)
         {
             bestTime = score;
+            if (thisScene.name == "Level1") { bestTimeLvl1 = bestTime; }
+            if (thisScene.name == "Level2") { bestTimeLvl2 = bestTime; }
+            if(thisScene.name == "Level3") { bestTimeLvl3 = bestTime; }
+
+
             winTxt.GetComponent<TextMeshProUGUI>().text = "New Best Time!";
             winTxt.SetActive(true);
             bestTimeTxt.SetText("BestTime: " + bestTime.ToString());
