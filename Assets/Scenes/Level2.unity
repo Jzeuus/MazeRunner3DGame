@@ -2062,6 +2062,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1533043291}
   - {fileID: 1724986964}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2137,8 +2138,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294247949
-  m_fontColor: {r: 0.050992843, g: 0.022694906, b: 0.9622642, a: 1}
+    rgba: 4281008113
+  m_fontColor: {r: 0.9450981, g: 1, b: 0.16470589, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4785,13 +4786,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533043290}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 382919874}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 595973519}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1555025381
 PrefabInstance:
@@ -5136,7 +5137,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 753674d771ec3c44e9d0ad6bb20d15a9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5249,7 +5250,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 595973519}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724986965
 MonoBehaviour:
@@ -5278,6 +5279,7 @@ MonoBehaviour:
   nextLvl: {fileID: 1446661509}
   restartLvl: {fileID: 1825016931}
   winTxt: {fileID: 1756194603}
+  bestTime: 0
   levelVictoryFX: {fileID: 8300000, guid: 75531501c2099c84691766a6cf8269c9, type: 3}
 --- !u!4 &1740735330 stripped
 Transform:
@@ -5319,7 +5321,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 10.9904, y: -100}
-  m_SizeDelta: {x: 382.0192, y: 91.7705}
+  m_SizeDelta: {x: 382.0192, y: 130}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1756194605
 MonoBehaviour:
@@ -5376,7 +5378,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

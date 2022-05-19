@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     //public GameObject btnNextLevel;
     //public TMP_Text timeTxt;
     public GameObject player;
-    
     public static GameManager Instance;
     public GameState gameState;
     public Scene thisScene;
@@ -112,11 +111,16 @@ public class GameManager : MonoBehaviour
         player.SetActive(false);
         Cursor.lockState = CursorLockMode.None; // to unlock cursor
         Cursor.visible = true; // to make cursor visible
+        if (thisScene.name == "Level3") {
+            winTxt.GetComponent<TextMeshProUGUI>().text = "CONGRATULATIONS!\nYou beat the Maze!";
+        }
+
+
     }
     private void HandleWinLevel()
     {
         AudioSource.PlayClipAtPoint(levelVictoryFX, player.transform.position);
-        endLevel();
+        
         int score = (int)currentTime;
         print("score= " + score.ToString());
      
@@ -133,7 +137,7 @@ public class GameManager : MonoBehaviour
             bestTimeTxt.SetText("BestTime: " + bestTime.ToString());
 
         }
-
+        this.endLevel();
             //loadLevel();
 
         }
